@@ -21,43 +21,57 @@ class Morse
 	
 	public:
 		
-		void deciphermessage(string msg)
-		{
-			//Message to cipher
-		    string ciphered_msg;
+	void deciphermessage(string msg)
+	{
+	    // Deciphered message storage
+	    string deciphered_msg;
+	    string c = ""; 
+	    int len = msg.length();
+	
+	    for (int i = 0; i < len; i++)
+	    {
+	        if (msg[i] != ' ') 
+	        {
+	            c += msg[i];
+	        } 
+	        else 
+	        {
+	            // Convert Morse sequence to text
+	            for (int j = 0; j < 36; j++)
+	            {
+	                if (c == morseCode[j])
+	                {
+	                    deciphered_msg += Alphabets[j];
+	                    break;
+	                }
+	            }
+	            c = ""; // Reset 
+	
+	            if (i + 1 < len && msg[i + 1] == ' ')
+	            {
+	                deciphered_msg += " ";
+	                i++; // Skip extra space
+	            }
+	        }
+	    }
+	
 
-			//Find the lenght of string
-		    int len = msg.length();
-		    string c = "";
-			//2nd Loop to covert the msg to morse code
-			for(int i = 0; i < len; i++)
-		    {
-		    	if(msg[i] != ' ')
-		    	{
-		    		c+=msg[i];		
-				}
-				else
-				{
-					for(int i = 0; i < 36; i++)
-						{   
-							if(c == morseCode[i])
-							{
-								ciphered_msg += Alphabets[i];
-							}
-						}
-						c = "";	
-							if(msg[i + 1] == ' ')
-							{
-								ciphered_msg += " ";
-							}
-				}
-			}
-			
-		
-			//Displaying the msg
-		 	cout << "The Original Message is: \n =  " << msg << endl;
-		 	cout << "The ciphered message is: \n =  " << ciphered_msg << endl;	
-		}
+	    if (!c.empty())
+	    {
+	        for (int j = 0; j < 36; j++)
+	        {
+	            if (c == morseCode[j])
+	            {
+	                deciphered_msg += Alphabets[j];
+	                break;
+	            }
+	        }
+	    }
+	
+	    // Display the results
+	    cout << "The Original Message is: \n = " << msg << endl;
+	    cout << "The Deciphered Message is: \n = " << deciphered_msg << endl;
+	}
 		string Ciphermessage(string msg)
 		{
 		
